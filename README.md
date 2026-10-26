@@ -1,6 +1,6 @@
 # jwt-demo-front
 
-Frontend Angular 21 del backend [jwt-demo](../jwt-demo): login con JWT, **guards**, **interceptors** y **refresh token**.
+Frontend Angular 21 del backend [jwt-demo](https://github.com/pablomarquezfernandez/jwt-demo): login con JWT, **guards**, **interceptors** y **refresh token**.
 Qué se implementó y cómo funciona: [IMPLEMENTACION.md](IMPLEMENTACION.md).
 
 ```bash
@@ -10,3 +10,5 @@ npm test -- --watch=false
 ```
 
 Usuarios de prueba: `ana / ana123` (USER) y `admin / admin123` (ADMIN).
+
+Código: https://github.com/pablomarquezfernandez/jwt-demo-front · Historial de commits: https://github.com/pablomarquezfernandez/jwt-demo-front/commits/main · Detalle de los commits en [IMPLEMENTACION.md](IMPLEMENTACION.md#repositorio-y-commits).

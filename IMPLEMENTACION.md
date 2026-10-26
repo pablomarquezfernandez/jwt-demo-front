@@ -1,12 +1,14 @@
 # Implementación: guards, interceptors y refresh token en Angular
 
-Este proyecto es el frontend del backend [jwt-demo](../jwt-demo) (Spring Boot). Muestra las tres piezas que usan el JWT en el navegador:
+> Repositorio: https://github.com/pablomarquezfernandez/jwt-demo-front · Backend: https://github.com/pablomarquezfernandez/jwt-demo · [Commits](#repositorio-y-commits)
+
+Este proyecto es el frontend del backend [jwt-demo](https://github.com/pablomarquezfernandez/jwt-demo) (Spring Boot). Muestra las tres piezas que usan el JWT en el navegador:
 
 1. **Guards**: deciden si el usuario puede entrar a una ruta.
 2. **Interceptors**: agregan `Authorization: Bearer <token>` a cada petición.
 3. **Refresh token**: cuando el token vence, piden uno nuevo y repiten la petición sin que el usuario lo note.
 
-Los cambios del backend (endpoint `/auth/refresh`, CORS, etc.) están explicados en [jwt-demo/IMPLEMENTACION.md](../jwt-demo/IMPLEMENTACION.md).
+Los cambios del backend (endpoint `/auth/refresh`, CORS, etc.) están explicados en [jwt-demo/IMPLEMENTACION.md](https://github.com/pablomarquezfernandez/jwt-demo/blob/main/IMPLEMENTACION.md).
 
 Angular 21, componentes *standalone*, guards e interceptors **funcionales** y la librería [`jwt-decode`](https://www.npmjs.com/package/jwt-decode) para leer el payload.
 
@@ -338,11 +340,16 @@ En la página **Perfil** el botón «3 peticiones a la vez» lo demuestra: con e
 ## Cómo ejecutarlo
 
 ```bash
+# Clonar los dos proyectos uno al lado del otro
+git clone https://github.com/pablomarquezfernandez/jwt-demo.git
+git clone https://github.com/pablomarquezfernandez/jwt-demo-front.git
+
 # Terminal 1: backend (tokens de 1 minuto para ver el refresh sin esperar 15)
-cd ../jwt-demo
+cd jwt-demo
 ./mvnw spring-boot:run -Dspring-boot.run.arguments=--jwt.expiration-minutes=1
 
 # Terminal 2: frontend
+cd jwt-demo-front
 npm install
 npm start            # http://localhost:4200
 ```
@@ -376,3 +383,31 @@ npm test -- --watch=false     # Vitest: 13 pruebas
 
 - Los tokens están en `localStorage`: cualquier script de la página puede leerlos (riesgo XSS). En producción es común dejar el access token en memoria y el refresh token en una cookie `HttpOnly` que JavaScript no puede leer.
 - `logout()` solo borra los tokens del navegador; el backend no revoca el refresh token.
+
+## Repositorio y commits
+
+| | URL |
+|---|---|
+| Repositorio | https://github.com/pablomarquezfernandez/jwt-demo-front |
+| Push a `main` (rama publicada) | https://github.com/pablomarquezfernandez/jwt-demo-front/tree/main |
+| Historial de commits | https://github.com/pablomarquezfernandez/jwt-demo-front/commits/main |
+| Repositorio del backend | https://github.com/pablomarquezfernandez/jwt-demo |
+| Presentación (privada: se abre cuando el autor la comparte) | https://claude.ai/artifact/BwbLQ3YH8DAm1LjAjAp98Y |
+
+Clonar:
+
+```bash
+git clone https://github.com/pablomarquezfernandez/jwt-demo-front.git
+```
+
+Commits, en orden:
+
+| # | Commit | Mensaje | Qué contiene |
+|---|---|---|---|
+| 1 | [`770dc4a`](https://github.com/pablomarquezfernandez/jwt-demo-front/commit/770dc4a64af3c5814e839fcc20775700ebf3dee2) | Proyecto Angular 21 base | Proyecto generado con Angular CLI 21.2.26. |
+| 2 | [`157c583`](https://github.com/pablomarquezfernandez/jwt-demo-front/commit/157c5839ae7c95fd91cea19f122706acae6ad4cd) | AuthService: guardar, leer y refrescar los tokens | `AuthService`, modelos, `jwt-decode` y helper de tokens de prueba. |
+| 3 | [`a9efbbf`](https://github.com/pablomarquezfernandez/jwt-demo-front/commit/a9efbbf7bba52e60358d965b35b35b43e4a0321b) | Guards: authGuard y rolGuard | Los dos guards y sus pruebas. |
+| 4 | [`50eaa48`](https://github.com/pablomarquezfernandez/jwt-demo-front/commit/50eaa482c1b346fda5f51c88692b23c791639870) | Interceptors: authInterceptor y refreshInterceptor | Los dos interceptors, su registro en `app.config.ts` y sus pruebas. |
+| 5 | [`262c7d8`](https://github.com/pablomarquezfernandez/jwt-demo-front/commit/262c7d8625e3fa29e0461816f0997b09117a2d16) | Páginas y rutas protegidas | Login, Productos, Perfil, Admin, Sin permiso, rutas y barra de navegación. |
+| 6 | [`5f81b3f`](https://github.com/pablomarquezfernandez/jwt-demo-front/commit/5f81b3f2d905317cf5afdf29e3cf83cc9117f9dc) | Documentar teoría, flujos e implementación | Primera versión de este `IMPLEMENTACION.md`. |
+| 7 | ver [historial](https://github.com/pablomarquezfernandez/jwt-demo-front/commits/main) | Agregar URL de repositorios y commits a la documentación | Esta sección y los enlaces entre repositorios. (Un commit no puede contener su propio identificador, por eso este aparece solo en el historial.) |
