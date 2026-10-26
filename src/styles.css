@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --fondo: #f5f4ef;
+  --texto: #18202f;
+  --suave: #4a5468;
+  --acento: #2559c4;
+  --borde: #d6d3c8;
+  --error: #a8510f;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--texto);
+  background: var(--fondo);
+}
+
+body { margin: 0; }
+nav { display: flex; gap: 16px; align-items: center; padding: 12px 24px; background: #121a2b; color: #f5f4ef; }
+nav a { color: #bcc6d8; text-decoration: none; }
+nav a.activo { color: #f5f4ef; font-weight: 600; }
+.espacio { flex: 1; }
+main { max-width: 760px; margin: 0 auto; padding: 24px 16px; }
+h1 small, h2 small { color: var(--suave); font-weight: 400; font-size: 0.6em; }
+.tarjeta { background: #fbfaf6; border: 1px solid var(--borde); border-radius: 12px; padding: 16px 20px; }
+form.tarjeta, section.tarjeta { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+label { display: flex; flex-direction: column; gap: 4px; }
+input { padding: 8px; border: 1px solid var(--borde); border-radius: 6px; font: inherit; }
+button { padding: 8px 14px; border: 0; border-radius: 6px; background: var(--acento); color: #fff; font: inherit; cursor: pointer; align-self: flex-start; }
+button.secundario { background: transparent; color: var(--acento); border: 1px solid var(--acento); }
+nav button.secundario { color: #f5f4ef; border-color: #bcc6d8; }
+.lista { list-style: none; margin: 0; }
+.lista li { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--borde); }
+.lista li:last-child { border-bottom: 0; }
+.error { color: var(--error); }
+.ayuda { color: var(--suave); }
+pre { background: #0f1522; color: #e4e8f0; padding: 12px; border-radius: 8px; overflow-x: auto; }

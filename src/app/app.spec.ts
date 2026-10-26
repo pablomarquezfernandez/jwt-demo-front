@@ -1,23 +1,33 @@
+import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+
 import { App } from './app';
+import { crearToken } from './core/testing/tokens';
 
 describe('App', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  function crear() {
+    TestBed.configureTestingModule({
       imports: [App],
-    }).compileComponents();
+      providers: [provideRouter([]), provideHttpClient()],
+    });
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    return fixture.nativeElement as HTMLElement;
+  }
+
+  it('sin sesión muestra el enlace para iniciar sesión', () => {
+    expect(crear().textContent).toContain('Iniciar sesión');
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it('should render title', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, jwt-demo-front');
+  it('con un token de ADMIN muestra el usuario y el enlace Admin', () => {
+    localStorage.setItem('token', crearToken('admin', ['ROLE_ADMIN'], 900));
+    const texto = crear().textContent;
+    expect(texto).toContain('admin');
+    expect(texto).toContain('Admin');
   });
 });
